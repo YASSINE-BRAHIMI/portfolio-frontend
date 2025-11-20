@@ -11,7 +11,7 @@ const Projects = () => {
 
   useEffect(() => {
     // Avec fetch
-    fetch("http://127.0.0.1:8000/api/projects")
+    fetch("https://yassinebrahimi.great-site.net/api/projects")
       .then((res) => res.json())
       .then((data) => {
         setProjects(data);
