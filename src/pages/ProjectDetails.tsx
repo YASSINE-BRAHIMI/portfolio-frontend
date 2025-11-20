@@ -38,7 +38,7 @@ const ProjectDetails = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`https://yassinebrahimi.great-site.net/api/projects/${id}`)
+    fetch("https://yassinebrahimi.great-site.net/api/projects/${id}")
       .then((res) => res.json())
       .then((data) => {
         console.log("Project data received:", data);
