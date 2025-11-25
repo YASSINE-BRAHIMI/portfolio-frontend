@@ -1,19 +1,9 @@
-import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Github, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-interface Category {
-  id: number;
-  name: string;
-}
-
-interface Tag {
-  id: number;
-  name: string;
-}
+import { useState, useEffect } from "react";
 
 interface Project {
   id: number;
@@ -23,86 +13,145 @@ interface Project {
   short_description?: string;
   technologies: string[];
   image_cover: string;
-  images?: string[] | string; // Peut être un tableau ou une chaîne JSON
-  gallery?: string[]; // Champ alternatif
+  images?: string[];
+  gallery?: string[];
   demo_link?: string;
   github_link?: string;
-  category?: Category;
-  tags?: Tag[];
+  category?: { name: string };
 }
 
 const ProjectDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const navigate = useNavigate();
 
+  // Scroll vers le haut au chargement de la page
   useEffect(() => {
-    fetch("https://yassinebrahimi.great-site.net/api/projects/${id}")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Project data received:", data);
-        
-        // Parser le champ images s'il est une chaîne JSON
-        if (typeof data.images === 'string') {
-          try {
-            data.images = JSON.parse(data.images);
-            console.log("Parsed images:", data.images);
-          } catch (e) {
-            console.error("Error parsing images JSON:", e);
-            data.images = [];
-          }
-        }
-        
-        // S'assurer que images est un tableau, sinon utiliser un tableau vide
-        if (!Array.isArray(data.images)) {
-          data.images = [];
-        }
-        
-        // Utiliser gallery si images est vide
-        if (data.images.length === 0 && data.gallery && Array.isArray(data.gallery)) {
-          data.images = data.gallery;
-        }
-        
-        // Convertir les chemins relatifs en chemins absolus pour Vite
-        data.images = data.images.map((img: string) => {
-          // Si le chemin commence par /assets, le convertir en chemin src
-          if (img.startsWith('/assets/projects/')) {
-            return img.replace('/assets/', '/src/assets/');
-          }
-          return img;
-        });
-        
-        console.log("Final images array:", data.images);
-        
-        setProject(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching project:", err);
-        setLoading(false);
-      });
+    window.scrollTo(0, 0);
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-lg">
-        Loading project details...
-      </div>
-    );
-  }
+  // Fonction pour retourner aux projets
+  const handleBackToProjects = () => {
+    navigate('/');
+    setTimeout(() => {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  // Données statiques de tous les projets
+  const projects: Project[] = [
+    {
+      id: 13,
+      title: "Système de Gestion de Stock pour Laboratoire",
+      slug: "gestion-stock-laboratoire-vbnet",
+      description: "Système complet de gestion de stock destiné à un laboratoire d'analyses médicales. L'application permet la gestion des fournisseurs, des utilisateurs avec rôles, des produits et des zones de stockage. Elle offre la création et la validation des commandes, la validation des produits reçus, la génération automatique de factures en PDF, ainsi que des alertes intelligentes pour les dates de péremption et les ruptures de stock. Interface simple, fiable et adaptée au personnel professionnel.",
+      short_description: "Application desktop de gestion de stock avec factures PDF et alertes.",
+      technologies: ["VB.NET", "MySQL", "WinForms"],
+      image_cover: "../src/assets/stock-app.png",
+      images: [
+        "../src/assets/projects/gestion_stock/commande.png",
+        "../src/assets/projects/gestion_stock/fournisseur.png",
+        "../src/assets/projects/gestion_stock/menu.png",
+        "../src/assets/projects/gestion_stock/produits.png",
+        "../src/assets/projects/gestion_stock/utilisateurs.png"
+      ],
+      demo_link: null,
+      github_link: null,
+      category: { name: "Desktop App" }
+    },
+    {
+      id: 14,
+      title: "Anabio Laboratory Website",
+      slug: "anabio-laboratory-website",
+      description: "Plateforme web complète pour le laboratoire médical Anabio. Le site offre une présentation professionnelle du laboratoire avec système de géolocalisation interactive, galerie photo personnalisable et dynamique, intégration des réseaux sociaux, et système de prise de rendez-vous en ligne. Les patients peuvent consulter les actualités médicales, soumettre leurs avis via un formulaire de satisfaction, et postuler en ligne via la page recrutement. Le back-office comprend un tableau de bord administrateur robuste permettant la gestion complète des réservations, la publication d'actualités, la modération des avis clients, et la gestion de la galerie multimédia. Architecture développée avec Laravel pour garantir sécurité, performance et évolutivité.",
+      short_description: "Site web professionnel pour laboratoire médical avec réservation en ligne et gestion administrative.",
+      technologies: ["Laravel", "PHP", "MySQL", "JavaScript", "Bootstrap", "Google Maps API", "jQuery"],
+      image_cover: "../src/assets/labanabio-home.png",
+      images: [
+        "../src/assets/projects/labanabio/home.png",
+        "../src/assets/projects/labanabio/emplacement.png",
+        "../src/assets/projects/labanabio/gallerie.png",
+        "../src/assets/projects/labanabio/actualite.png",
+        "../src/assets/projects/labanabio/admin-dashboard.png",
+        "../src/assets/projects/labanabio/appointments.png"
+      ],
+      demo_link: "https://www.labanabio.com/",
+      github_link: null,
+      category: { name: "Web Application" }
+    },
+    {
+      id: 15,
+      title: "Prédiction des Prix de Voitures au Maroc",
+      slug: "prediction-prix-voitures-maroc-ml",
+      description: "Développement d'un modèle prédictif basé sur l'Intelligence Artificielle (Machine Learning) permettant d'estimer les prix des voitures sur le marché marocain. Les données ont été collectées par web scraping depuis Avito.ma et traitées avec des algorithmes avancés. Le modèle atteint un taux de précision de 96%, offrant une estimation fiable et utile pour les acheteurs, vendeurs et concessionnaires automobiles. Le projet comprend une analyse exploratoire approfondie des données, un nettoyage et une transformation sophistiqués, l'entraînement de plusieurs modèles de régression (Linear Regression, Random Forest), et le déploiement d'une interface utilisateur moderne et responsive.",
+      short_description: "Modèle ML de prédiction de prix avec 96% de précision basé sur données Avito.ma.",
+      technologies: ["Python", "Machine Learning", "Scikit-learn", "Pandas", "NumPy", "Jupyter Notebook", "BeautifulSoup", "Google Colab", "Seaborn", "Matplotlib"],
+      image_cover: "../src/assets/prediction_home.png",
+      images: [
+        "../src/assets/projects/prediction_voiture/prediction_home.png",
+        "../src/assets/projects/prediction_voiture/comment_fct.png",
+        "../src/assets/projects/prediction_voiture/formulaire.png",
+        "../src/assets/projects/prediction_voiture/resultat.png"
+      ],
+      demo_link: null,
+      github_link: null,
+      category: { name: "AI Project" }
+    },
+    {
+      id: 16,
+      title: "Système de Recommandation de Formations",
+      slug: "systeme-recommandation-formations-maroc",
+      description: "Mise en place d'un moteur de recommandation intelligent destiné aux jeunes marocains, afin de proposer des formations adaptées en fonction du métier visé. Le système analyse les compétences nécessaires et oriente automatiquement vers les parcours les plus pertinents. Développé avec Python et FastAPI pour le backend, React pour le frontend, et des algorithmes de recherche de similarité vectorielle via FAISS pour garantir des recommandations rapides et précises.",
+      short_description: "Moteur de recommandation intelligent pour orienter les jeunes vers les formations adaptées.",
+      technologies: ["Python", "FastAPI", "React", "FAISS", "Pandas", "NumPy", "Matplotlib", "Seaborn", "NLP", "Google Colab"],
+      image_cover: "../src/assets/recommendation_home.png",
+      images: [
+        "../src/assets/projects/systeme_recommendation_formation/recommendation_home.png",
+        "../src/assets/projects/systeme_recommendation_formation/recherche_intelligent.png",
+        "../src/assets/projects/systeme_recommendation_formation/comment_camarche.png",
+        "../src/assets/projects/systeme_recommendation_formation/notre_mission.png",
+        "../src/assets/projects/systeme_recommendation_formation/resultat.png",
+        "../src/assets/projects/systeme_recommendation_formation/contactez_nous.png"
+      ],
+      demo_link: null,
+      github_link: null,
+      category: { name: "AI Project" }
+    },
+    {
+      id: 18,
+      title: "Détection d'Objets en Temps Réel avec YOLOv8",
+      slug: "detection-objets-temps-reel-yolov8",
+      description: "Projet de Computer Vision développé dans le cadre de la Licence d'Excellence en Intelligence Artificielle à l'Université Hassan II de Casablanca - Faculté des Sciences Ben M'Sik. Le système utilise YOLOv8m pour détecter efficacement des objets petits et rapides en temps réel, répondant aux besoins des véhicules autonomes, de la robotique et de la surveillance intelligente.",
+      short_description: "Système de détection d'objets temps réel avec YOLOv8m - 85.6% de précision sur 20 classes.",
+      technologies: ["Python", "YOLOv8", "PyTorch", "Ultralytics", "Computer Vision", "Deep Learning", "Roboflow", "OpenCV"],
+      image_cover: "../src/assets/deploiment.png",
+      images: [
+        "../src/assets/projects/detection_object/resultat.png",
+        "../src/assets/projects/detection_object/deploiment.png",
+        "../src/assets/projects/detection_object/poster.png"
+      ],
+      demo_link: null,
+      github_link: null,
+      category: { name: "AI Project" }
+    }
+  ];
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Trouver le projet par slug ou id
+  const project = projects.find(p => p.slug === id || p.id.toString() === id);
 
   if (!project) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold">Project Not Found</h1>
-          <Link to="/">
-            <Button>
-              <ArrowLeft className="mr-2 w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
+          <Button onClick={handleBackToProjects}>
+            <ArrowLeft className="mr-2 w-4 h-4" />
+            Back to Projects
+          </Button>
         </div>
       </div>
     );
@@ -114,13 +163,15 @@ const ProjectDetails = () => {
 
       <main className="pt-24 pb-20">
         <div className="container px-4 sm:px-6 lg:px-8">
-          {/* Back Button */}
-          <Link to="/" className="inline-block mb-8">
-            <Button variant="outline" className="border-primary/50 hover:bg-primary/10">
-              <ArrowLeft className="mr-2 w-4 h-4" />
-              Back to Projects
-            </Button>
-          </Link>
+          {/* Back Button modifié */}
+          <Button 
+            variant="outline" 
+            className="border-primary/50 hover:bg-primary/10 mb-8"
+            onClick={handleBackToProjects}
+          >
+            <ArrowLeft className="mr-2 w-4 h-4" />
+            Back to Projects
+          </Button>
 
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
@@ -184,23 +235,6 @@ const ProjectDetails = () => {
                           className="px-4 py-2 rounded-lg bg-card border border-border/50 text-sm font-medium hover:border-primary/50 transition-colors"
                         >
                           {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Tags */}
-                {project.tags && project.tags.length > 0 && (
-                  <div>
-                    <h3 className="text-lg font-semibold mt-6 mb-3">Tags</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag.id}
-                          className="px-3 py-1 bg-accent/10 text-accent-foreground rounded-full text-sm border border-accent/20"
-                        >
-                          #{tag.name}
                         </span>
                       ))}
                     </div>

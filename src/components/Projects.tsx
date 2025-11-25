@@ -1,37 +1,72 @@
-import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import { Link } from "react-router-dom";
-import axios from "axios"; // si tu veux utiliser axios
 
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Avec fetch
-    fetch("https://yassinebrahimi.great-site.net/api/projects")
-      .then((res) => res.json())
-      .then((data) => {
-        setProjects(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Erreur API :", err);
-        setLoading(false);
-      });
-
-    // --- OU avec axios ---
-    // axios.get("http://127.0.0.1:8000/api/projects")
-    //   .then(res => setProjects(res.data))
-    //   .catch(err => console.error(err))
-    //   .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
-    return <p className="text-center py-20">Loading projects...</p>;
-  }
+  // Données statiques des projets
+  const projects = [
+    {
+      id: 13,
+      title: "Système de Gestion de Stock pour Laboratoire",
+      slug: "gestion-stock-laboratoire-vbnet",
+      short_description: "Application desktop de gestion de stock avec factures PDF et alertes.",
+      description: "Système complet de gestion de stock destiné à un laboratoire d'analyses médicales...",
+      technologies: ["VB.NET", "MySQL", "WinForms"],
+      image_cover: "../src/assets/stock-app.png",
+      demo_link: null,
+      github_link: null,
+      category: { name: "Desktop App" }
+    },
+    {
+      id: 14,
+      title: "Anabio Laboratory Website",
+      slug: "anabio-laboratory-website",
+      short_description: "Site web professionnel pour laboratoire médical avec réservation en ligne et gestion administrative.",
+      description: "Plateforme web complète pour le laboratoire médical Anabio...",
+      technologies: ["Laravel", "PHP", "MySQL", "JavaScript", "Bootstrap", "Google Maps API", "jQuery"],
+      image_cover: "../src/assets/labanabio-home.png",
+      demo_link: "https://www.labanabio.com/",
+      github_link: null,
+      category: { name: "Web Application" }
+    },
+    {
+      id: 15,
+      title: "Prédiction des Prix de Voitures au Maroc",
+      slug: "prediction-prix-voitures-maroc-ml",
+      short_description: "Modèle ML de prédiction de prix avec 96% de précision basé sur données Avito.ma.",
+      description: "Développement d'un modèle prédictif basé sur l'Intelligence Artificielle...",
+      technologies: ["Python", "Machine Learning", "Scikit-learn", "Pandas", "NumPy", "Jupyter Notebook", "BeautifulSoup", "Google Colab", "Seaborn", "Matplotlib"],
+      image_cover: "../src/assets/prediction_home.png",
+      demo_link: null,
+      github_link: null,
+      category: { name: "AI Project" }
+    },
+    {
+      id: 16,
+      title: "Système de Recommandation de Formations",
+      slug: "systeme-recommandation-formations-maroc",
+      short_description: "Moteur de recommandation intelligent pour orienter les jeunes vers les formations adaptées.",
+      description: "Mise en place d'un moteur de recommandation intelligent destiné aux jeunes marocains...",
+      technologies: ["Python", "FastAPI", "React", "FAISS", "Pandas", "NumPy", "Matplotlib", "Seaborn", "NLP", "Google Colab"],
+      image_cover: "../src/assets/recommendation_home.png",
+      demo_link: null,
+      github_link: null,
+      category: { name: "AI Project" }
+    },
+    {
+      id: 18,
+      title: "Détection d'Objets en Temps Réel avec YOLOv8",
+      slug: "detection-objets-temps-reel-yolov8",
+      short_description: "Système de détection d'objets temps réel avec YOLOv8m - 85.6% de précision sur 20 classes.",
+      description: "Projet de Computer Vision développé dans le cadre de la Licence d'Excellence en Intelligence Artificielle...",
+      technologies: ["Python", "YOLOv8", "PyTorch", "Ultralytics", "Computer Vision", "Deep Learning", "Roboflow", "OpenCV"],
+      image_cover: "../src/assets/deploiment.png",
+      demo_link: null,
+      github_link: null,
+      category: { name: "AI Project" }
+    }
+  ];
 
   return (
     <section id="projects" className="py-20 sm:py-32 bg-muted/30">
@@ -100,7 +135,7 @@ const Projects = () => {
 
                   {/* Actions */}
                   <div className="flex flex-wrap gap-3 pt-2">
-                    <Link to={`/projects/${project.id}`} className="flex-1">
+                    <Link to={`/projects/${project.slug}`} className="flex-1">
                       <Button className="w-full bg-primary hover:bg-primary/90 group/btn">
                         View Details
                         <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
