@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Brain, Sparkles, ArrowRight, Code2, Database, Cpu } from "lucide-react";
+import background from "@/assets/background.mp4"; // <-- Import du background
+
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -26,7 +28,7 @@ const Hero = () => {
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
     >
       {/* Background 3D avec overlay amélioré */}
-      <div className="absolute inset-0 z-0">
+      {/* <div className="absolute inset-0 z-0">
         <iframe
           src="https://my.spline.design/interactiveaiwebsite-bJLbML2NMj99wQB5XbtMmTjj/"
           frameBorder="0"
@@ -35,7 +37,19 @@ const Hero = () => {
           title="3D Background"
           className="opacity-70"
         ></iframe>
+      </div> */}
+      {/* Background vidéo */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <video
+          src={background}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-70"
+        />
       </div>
+
 
       {/* Gradient overlay stratifié */}
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent z-[1]" />
