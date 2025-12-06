@@ -13,7 +13,7 @@ const Projects = () => {
       short_description: "Application desktop de gestion de stock avec factures PDF et alertes.",
       description: "Système complet de gestion de stock destiné à un laboratoire d'analyses médicales...",
       technologies: ["VB.NET", "MySQL", "WinForms"],
-      image_cover: "../src/assets/stock-app.png",
+      image_cover: "/assets/stock-app.png",
       demo_link: null,
       github_link: null,
       category: { name: "Desktop App" }
@@ -25,7 +25,7 @@ const Projects = () => {
       short_description: "Site web professionnel pour laboratoire médical avec réservation en ligne et gestion administrative.",
       description: "Plateforme web complète pour le laboratoire médical Anabio...",
       technologies: ["Laravel", "PHP", "MySQL", "JavaScript", "Bootstrap", "Google Maps API", "jQuery"],
-      image_cover: "../src/assets/labanabio-home.png",
+      image_cover: "assets/labanabio-home.png",
       demo_link: "https://www.labanabio.com/",
       github_link: null,
       category: { name: "Web Application" }
@@ -37,7 +37,7 @@ const Projects = () => {
       short_description: "Modèle ML de prédiction de prix avec 96% de précision basé sur données Avito.ma.",
       description: "Développement d'un modèle prédictif basé sur l'Intelligence Artificielle...",
       technologies: ["Python", "Machine Learning", "Scikit-learn", "Pandas", "NumPy", "Jupyter Notebook", "BeautifulSoup", "Google Colab", "Seaborn", "Matplotlib"],
-      image_cover: "../src/assets/prediction_home.png",
+      image_cover: "/assets/prediction_home.png",
       demo_link: null,
       github_link: null,
       category: { name: "AI Project" }
@@ -49,7 +49,7 @@ const Projects = () => {
       short_description: "Moteur de recommandation intelligent pour orienter les jeunes vers les formations adaptées.",
       description: "Mise en place d'un moteur de recommandation intelligent destiné aux jeunes marocains...",
       technologies: ["Python", "FastAPI", "React", "FAISS", "Pandas", "NumPy", "Matplotlib", "Seaborn", "NLP", "Google Colab"],
-      image_cover: "../src/assets/recommendation_home.png",
+      image_cover: "/assets/recommendation_home.png",
       demo_link: null,
       github_link: null,
       category: { name: "AI Project" }
@@ -61,7 +61,7 @@ const Projects = () => {
       short_description: "Système de détection d'objets temps réel avec YOLOv8m - 85.6% de précision sur 20 classes.",
       description: "Projet de Computer Vision développé dans le cadre de la Licence d'Excellence en Intelligence Artificielle...",
       technologies: ["Python", "YOLOv8", "PyTorch", "Ultralytics", "Computer Vision", "Deep Learning", "Roboflow", "OpenCV"],
-      image_cover: "../src/assets/deploiment.png",
+      image_cover: "/assets/deploiment.png",
       demo_link: null,
       github_link: null,
       category: { name: "AI Project" }

@@ -1,6 +1,5 @@
 import { Play, Pause, Volume2, VolumeX, Maximize, Zap, Code, ShieldCheck } from "lucide-react";
 import { useState, useRef } from "react";
-import promoVideo from "@/assets/promo-video.mp4";
 
 const PromoVideo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -68,9 +67,10 @@ const PromoVideo = () => {
                 playsInline
                 onEnded={() => setIsPlaying(false)}
               >
-                <source src={promoVideo} type="video/mp4" />
+                <source src="/assets/promo-video.mp4" type="video/mp4" />
                 Votre navigateur ne supporte pas la lecture de vidéos.
               </video>
+
 
               {/* Overlay de contrôles */}
               <div className="absolute inset-0 transition-opacity opacity-0 group-hover:opacity-100">

@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Brain, Sparkles, ArrowRight, Code2, Database, Cpu } from "lucide-react";
-import background from "@/assets/background.mp4"; // <-- Import du background
 
 
 const Hero = () => {
@@ -41,7 +40,7 @@ const Hero = () => {
       {/* Background vidéo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
-          src={background}
+          src="/assets/background.mp4"
           autoPlay
           loop
           muted

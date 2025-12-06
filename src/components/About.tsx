@@ -1,6 +1,4 @@
 import { Code2, Cpu, Database, Globe, Palette, Server } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
-import resumePDF from "@/assets/resume.pdf"; // <-- Import du CV
 
 const About = () => {
   const skills = [
@@ -29,7 +27,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity" />
                 <div className="relative rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl">
                   <img
-                    src={profilePhoto}
+                    src="/assets/profile-photo.jpg"
                     alt="Yassine Brahimi - Développeur Full Stack & IA"
                     className="w-full h-full object-cover aspect-square"
                   />
@@ -71,7 +69,7 @@ const About = () => {
                 {/* Bouton Télécharger CV */}
                 <div className="mt-4">
                   <a
-                    href={resumePDF}
+                    href="/assets/resume.pdf"
                     download="Yassine_Brahimi_CV.pdf"
                     className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary/90 transition-all"
                   >
