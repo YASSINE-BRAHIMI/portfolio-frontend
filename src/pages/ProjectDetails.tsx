@@ -49,10 +49,10 @@ const ProjectDetails = () => {
       description: "Système complet de gestion de stock destiné à un laboratoire d'analyses médicales. L'application permet la gestion des fournisseurs, des utilisateurs avec rôles, des produits et des zones de stockage. Elle offre la création et la validation des commandes, la validation des produits reçus, la génération automatique de factures en PDF, ainsi que des alertes intelligentes pour les dates de péremption et les ruptures de stock. Interface simple, fiable et adaptée au personnel professionnel.",
       short_description: "Application desktop de gestion de stock avec factures PDF et alertes.",
       technologies: ["VB.NET", "MySQL", "WinForms"],
-      image_cover: "public/assets/stock-app.png",
+      image_cover: "/assets/stock-app.png",
       images: [
         "/assets/projects/gestion_stock/commande.png",
-        "/projects/gestion_stock/fournisseur.png",
+        "/assets/projects/gestion_stock/fournisseur.png",
         "/assets/projects/gestion_stock/menu.png",
         "/assets/projects/gestion_stock/produits.png",
         "/assets/projects/gestion_stock/utilisateurs.png"
