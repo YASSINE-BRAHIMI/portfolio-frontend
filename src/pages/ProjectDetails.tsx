@@ -147,10 +147,10 @@ const ProjectDetails = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold">Project Not Found</h1>
+          <h1 className="text-4xl font-bold">Projet Introuvable</h1>
           <Button onClick={handleBackToProjects}>
             <ArrowLeft className="mr-2 w-4 h-4" />
-            Back to Projects
+            Retour aux Projets
           </Button>
         </div>
       </div>
@@ -170,7 +170,7 @@ const ProjectDetails = () => {
             onClick={handleBackToProjects}
           >
             <ArrowLeft className="mr-2 w-4 h-4" />
-            Back to Projects
+            Retour aux Projets
           </Button>
 
           <div className="max-w-6xl mx-auto">
@@ -208,7 +208,7 @@ const ProjectDetails = () => {
                       onClick={() => window.open(project.demo_link, "_blank")}
                     >
                       <ExternalLink className="mr-2 w-5 h-5" />
-                      Live Demo
+                      Démo en ligne
                     </Button>
                   )}
                   {project.github_link && (
@@ -219,7 +219,7 @@ const ProjectDetails = () => {
                       onClick={() => window.open(project.github_link, "_blank")}
                     >
                       <Github className="mr-2 w-5 h-5" />
-                      View Code
+                      Voir le code
                     </Button>
                   )}
                 </div>
@@ -227,7 +227,7 @@ const ProjectDetails = () => {
                 {/* Technologies */}
                 {project.technologies?.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Technologies Used</h3>
+                    <h3 className="text-lg font-semibold mb-3">Technologies Utilisées</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, index) => (
                         <span
@@ -247,7 +247,7 @@ const ProjectDetails = () => {
             {project.short_description && (
               <div className="rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 sm:p-12 mb-16">
                 <h2 className="text-3xl font-bold mb-4">
-                  Key <span className="text-gradient">Details</span>
+                  Points <span className="text-gradient">Clés</span>
                 </h2>
                 <p className="text-base leading-relaxed">{project.short_description}</p>
               </div>
@@ -257,7 +257,7 @@ const ProjectDetails = () => {
             {project.images && project.images.length > 0 && (
               <div className="rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 sm:p-12">
                 <h2 className="text-3xl font-bold mb-8">
-                  Project <span className="text-gradient">Gallery</span>
+                  <span className="text-gradient">Galerie </span>du Projet 
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {project.images.map((image, index) => (
@@ -295,7 +295,7 @@ const ProjectDetails = () => {
           </button>
           <img
             src={selectedImage}
-            alt="Full size preview"
+            alt="Aperçu en pleine taille"
             className="max-w-full max-h-full object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />
