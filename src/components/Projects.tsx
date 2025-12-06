@@ -74,10 +74,10 @@ const Projects = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-            My <span className="text-gradient">Projects</span>
+            Mes <span className="text-gradient">Projets</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground">
-            Explore my portfolio of web applications, desktop software, and AI-powered solutions
+            Découvrez mon portfolio d'applications web, logiciels desktop et solutions basées sur l'IA
           </p>
         </div>
 
@@ -101,7 +101,7 @@ const Projects = () => {
 
                   {/* Category Badge */}
                   <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/90 backdrop-blur-sm text-primary-foreground text-xs font-medium shadow-lg">
-                    {project.category?.name || "Uncategorized"}
+                    {project.category?.name || "Non catégorisé"}
                   </div>
                 </div>
 
@@ -137,7 +137,7 @@ const Projects = () => {
                   <div className="flex flex-wrap gap-3 pt-2">
                     <Link to={`/projects/${project.slug}`} className="flex-1">
                       <Button className="w-full bg-primary hover:bg-primary/90 group/btn">
-                        View Details
+                        Voir les détails
                         <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Button>
                     </Link>

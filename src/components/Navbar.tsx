@@ -12,7 +12,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // New scroll / redirect system
+  // Nouveau système de scroll / redirection
   const goToSection = (id: string) => {
     const isHomePage = window.location.pathname === "/";
 
@@ -38,6 +38,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16 sm:h-20">
+
           {/* Logo */}
           <button
             onClick={() => goToSection("home")}
@@ -46,7 +47,7 @@ const Navbar = () => {
             <span className="text-cyan-400">&lt;YB/&gt;</span> Portfolio
           </button>
 
-          {/* Desktop Menu */}
+          {/* Menu Desktop */}
           <div className="hidden md:flex items-center space-x-8">
             {sections.map((section) => (
               <button
@@ -54,24 +55,29 @@ const Navbar = () => {
                 onClick={() => goToSection(section)}
                 className="text-gray-300 hover:text-cyan-400 transition-colors font-medium"
               >
-                {section === "video"
-                  ? "Promo Video"
-                  : section.charAt(0).toUpperCase() + section.slice(1)}
+                {
+                  section === "home" ? "Accueil" :
+                  section === "about" ? "À propos" :
+                  section === "video" ? "Vidéo Promo" :
+                  section === "projects" ? "Projets" :
+                  section === "contact" ? "Contact" :
+                  section
+                }
               </button>
             ))}
           </div>
 
-          {/* CTA - Desktop */}
+          {/* Bouton Desktop */}
           <div className="hidden md:block">
             <Button
               onClick={() => goToSection("contact")}
               className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-6 py-2 rounded-full shadow-cyan-500/40 hover:shadow-cyan-500/60 transition-all duration-300"
             >
-              Get Started
+              Commencer
             </Button>
           </div>
 
-          {/* Mobile Menu Trigger */}
+          {/* Mobile Menu Icon */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden text-gray-300 p-2"
@@ -80,27 +86,35 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Menu Mobile */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-xl border-t border-cyan-400/20 shadow-lg">
             <div className="px-6 py-6 space-y-4">
+
               {sections.map((section) => (
                 <button
                   key={section}
                   onClick={() => goToSection(section)}
                   className="block w-full text-left py-2 text-gray-300 hover:text-cyan-400 transition-colors font-medium"
                 >
-                  {section === "video"
-                    ? "Promo Video"
-                    : section.charAt(0).toUpperCase() + section.slice(1)}
+                  {
+                    section === "home" ? "Accueil" :
+                    section === "about" ? "À propos" :
+                    section === "video" ? "Vidéo Promo" :
+                    section === "projects" ? "Projets" :
+                    section === "contact" ? "Contact" :
+                    section
+                  }
                 </button>
               ))}
+
               <Button
                 onClick={() => goToSection("contact")}
                 className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-full shadow-cyan-500/40 hover:shadow-cyan-500/60 transition-all duration-300"
               >
-                Get Started
+                Commencer
               </Button>
+
             </div>
           </div>
         )}
