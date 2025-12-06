@@ -51,11 +51,11 @@ const ProjectDetails = () => {
       technologies: ["VB.NET", "MySQL", "WinForms"],
       image_cover: "public/assets/stock-app.png",
       images: [
-        "public/assets/projects/gestion_stock/commande.png",
-        "public/projects/gestion_stock/fournisseur.png",
-        "public/assets/projects/gestion_stock/menu.png",
-        "public/assets/projects/gestion_stock/produits.png",
-        "public/assets/projects/gestion_stock/utilisateurs.png"
+        "/assets/projects/gestion_stock/commande.png",
+        "/projects/gestion_stock/fournisseur.png",
+        "/assets/projects/gestion_stock/menu.png",
+        "/assets/projects/gestion_stock/produits.png",
+        "/assets/projects/gestion_stock/utilisateurs.png"
       ],
       demo_link: null,
       github_link: null,
